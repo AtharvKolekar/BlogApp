@@ -13,8 +13,12 @@ const newCard = ({
 }) => `<div class="col-lg-4 col-md-6" id=${id}>
 <div class="card m-2">
   <div class="card-header d-flex justify-content-end gap-2">
-    <button type="button" class="btn btn-outline-success" id="${id}" onclick="editCard.apply(this, arguments)"><i class="fas fa-pencil-alt" id="${id}" onclick="editCard.apply(this, arguments)"></i></button>
-    <button type="button" class="btn btn-outline-danger" id="${id}" onclick="deleteCard.apply(this, arguments)"><i class="fas fa-trash-alt" id="${id}" onclick="deleteCard.apply(this, arguments)"></i></button>
+    <button type="button" class="btn btn-outline-success" id="${id}" onclick="editCard.apply(this, arguments)">
+    	<i class="fas fa-pencil-alt" id="${id}" onclick="editCard.apply(this, arguments)"></i>
+     </button>
+    <button type="button" class="btn btn-outline-danger" id="${id}" onclick="deleteCard.apply(this, arguments)">
+    	<i class="fas fa-trash-alt" id="${id}" onclick="deleteCard.apply(this, arguments)"></i>
+     </button>
   </div>
   <img
     src=${imageUrl}
