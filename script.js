@@ -35,15 +35,10 @@ const newCard = ({
 // --------------------------------------------------
 const loadData = () => {
 
-	// access localstorage
-	// localStorage.getItem("blog") ===  localStorage.blog
-	const getInitialData = localStorage.blog; // if null, then
+	const getInitialData = localStorage.blog; 
 	if (!getInitialData) return;
 
-	// convert stringified-object to object
-	const {
-		cards
-	} = JSON.parse(getInitialData);
+	const { cards } = JSON.parse(getInitialData);
 
 	// map around the array to generate HTML card and inject it to DOM
 	cards.map((blogObject) => {
@@ -54,17 +49,13 @@ const loadData = () => {
 };
 
 const updateLocalStorage = () => {
-	localStorage.setItem("blog", JSON.stringify({
-		cards: globalStore
-	}))
+	localStorage.setItem("blog", JSON.stringify({cards: globalStore }))
 }
 
-//  function for save changes----------------------------------------
 
-// create a function which will trigerred on clicking on save changes in the modal
 const saveChanges = () => {
 	const blogData = {
-		id: `${Date.now()}`, // generating a unique id for each card
+		id: `${Date.now()}`, 
 		imageUrl: document.getElementById('imageurl').value,
 		blogTitle: document.getElementById('title').value,
 		blogType: document.getElementById('type').value,
@@ -76,44 +67,34 @@ const saveChanges = () => {
 
 	globalStore.push(blogData);
 
-	//  API  -> add t localStorage
-	updateLocalStorage()
-	// provide some unique identification, i.e key, here key is "blog", 
+	updateLocalStorage();
 
 };
 
-// function for deleting a card -------------------
+
 
 const deleteCard = (event) => {
 	// id
 	event = window.event;
 	const targetID = event.target.id;
-	const tagname = event.target.tagName; // BUTTON OR I
+	const tagname = event.target.tagName; 
 
-	// assign the same id of card to button also
-
-	// search the globalStore, remove the object which matches with the id
+	
 	globalStore = globalStore.filter((blogObject) => blogObject.id !== targetID);
 
 	updateLocalStorage();
 
-	// access DOM to remove them
-
 	if (tagname === "BUTTON") {
-		// task__container
 		return blogContainer.removeChild(
 			event.target.parentNode.parentNode.parentNode // col-lg-4
 		);
 	}
 
-	// else
-	// blog__container
 	return blogContainer.removeChild(
 		event.target.parentNode.parentNode.parentNode.parentNode // col-lg-4
 	);
 };
 
-// function for editing
 const editCard = (event) => {
 
 	event = window.event;
@@ -132,9 +113,7 @@ const editCard = (event) => {
 	let blogDescription = parentElement.childNodes[5].childNodes[3];
 	let blogType = parentElement.childNodes[5].childNodes[5];
 	let submitBtn = parentElement.childNodes[7].childNodes[1];
-	// console.log(taskTitle, taskDescription, taskType);
-
-	// setAttributes
+	
 	blogTitle.setAttribute("contenteditable", "true");
 
 	blogDescription.setAttribute("contenteditable", "true");
@@ -145,7 +124,6 @@ const editCard = (event) => {
 	);
 	submitBtn.innerHTML = "Save Changes";
 
-	//  modal removed
 	submitBtn.removeAttribute("data-bs-toggle");
 	submitBtn.removeAttribute("data-bs-target");
 
@@ -177,7 +155,6 @@ const saveEditChanges = (event) => {
 		blogType: blogType.innerHTML,
 	}
 
-	// console.log(updatedData);
 	globalStore = globalStore.map((blog) => {
 		if (blog.id === targetID) {
 			return {
@@ -188,7 +165,7 @@ const saveEditChanges = (event) => {
 				blogDescription: updatedData.blogDescription,
 			};
 		}
-		return blog; // important statement
+		return blog; 
 	});
 
 	updateLocalStorage();
