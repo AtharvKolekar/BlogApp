@@ -1,10 +1,9 @@
-// targeting the parent element
 const blogContainer = document.querySelector('.blog__container');
 const blogModal = document.querySelector(".blog__modal__body");
-// global 
+ 
 let globalStore = [];
 
-// a function for creating a new card
+
 const newCard = ({
 	id,
 	imageUrl,
@@ -32,7 +31,7 @@ const newCard = ({
 </div>
 </div>`;
 
-// --------------------------------------------------
+
 const loadData = () => {
 
 	const getInitialData = localStorage.blog; 
